@@ -1,13 +1,13 @@
 <?php
-
 class Database
 {
     private $host = 'localhost';
     private $dbName = 'cms';
-    private $userName = 'user2';
-    private $password = 'blade2005';
+    private $userName = 'root';
+    private $password = '';
     private $table;
     private $options = ['cost' => 12];
+
 
 
     public function databaseConnection()
@@ -20,19 +20,14 @@ class Database
             echo 'Connection Failed' . $e->getMessage();
             exit();
         }
-
     }
-
-
     public function insertStatement($title, $body)
     {
         $stmt = $this->databaseConnection()->prepare("INSERT INTO articles (title, body) VALUES (:title, :body)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':body', $body);
         $stmt->execute();
-
     }
-
     public function register($fullName, $email, $pass, $userName)
     {
         if($fullName == '' || $email == '' || $pass == '' || $userName == ''){
@@ -49,15 +44,14 @@ class Database
             $stmt->bindParam(':pass',$pass);
             $stmt->bindParam(':userName', $userName);
             $stmt->execute();
-            header('Location: http://www.localhost/cms/views/member.php');
+            header('Location: http://www.localhost/cms/views/login.php');
         }
-
         
     }
+
 
     private function passwordEncrypt($password)
     {
         return password_hash($password, CRYPT_BLOWFISH, $this->options);
     }
-
 }
