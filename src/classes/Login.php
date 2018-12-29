@@ -21,14 +21,19 @@ class Login extends Database
 
             $stmt = $this->databaseConnection()->prepare("SELECT username, password FROM users WHERE username = :username");
             $stmt->execute([':username' => $username]);
+            
+            //fetches an associative array back an assigns to $user
             $user = $stmt->fetch();
-
+            
             //check if user is a current user
-            if($user['username'] == $username && $user['password'] == $password){
-                header('Location: http://www.localhost/cms/views/member.php');
-            } else {
-                $error = ErrorHandling::error('Sorry, credentials are either incorrect, or username or password are incorrect');
+            if($user['username'] != $username){
+                $error = ErrorHandling::error('Sorry the username provided cannot be found');
                 return $error;
+            } else if (password_verify($password, $user['password']) === false){
+                $error = ErrorHandling::error('Sorry the password does not match');
+                return $error;
+            } else {
+                header('Location: http://www.localhost/cms/views/member.php');
             }
             
         }
