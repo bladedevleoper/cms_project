@@ -11,5 +11,6 @@ class Post extends Database
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':body', $body);
         $stmt->execute();
+        return ErrorHandling::success('Article has been posted successfully');
     }
 }

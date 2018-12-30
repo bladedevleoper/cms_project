@@ -1,6 +1,7 @@
 <?php
 require_once( '../src/config.php' );
-    $session = new Session();
+    Session::start();
+    //Session::destroy();
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,27 @@ require_once( '../src/config.php' );
             <?php
                 ErrorHandling::success('Logged in Successfully');
             ?>   
+        </div>
+
+        <div class="row">
+            <div class="col-sm-10">
+                <span>Welcome <?php 
+                    if(isset($_SESSION['username'])){
+                        echo  $_SESSION['username'];
+                    }
+                    //var_dump($_SESSION, self::$sessionStart);
+                    ?>
+                </span>
+
+                
+                <div>
+                    <form action="<?php Session::destroy(); ?>" method="POST">
+                    
+                    <button type="submit">Log out</button>
+                    </form>
+                    
+                </div>
+            </div>
         </div>
     </div>
 
