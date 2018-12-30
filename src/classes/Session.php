@@ -32,11 +32,12 @@ class Session
     {
         if(self::$sessionStart == true){
             //not sure if a parameter needs to go in this one
+            self::$sessionStart = false;
             session_unset();
             session_destroy();
             
             //self::$sessionStart = false;
-            //header('Location: http://www.localhost/cms/views/login.php');
+            header('Location: http://www.localhost/cms/views/login.php');
             //exit;
         }
         

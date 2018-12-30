@@ -33,10 +33,10 @@ require_once( '../src/config.php' );
 
                 
                 <div>
-                    <form action="<?php Session::destroy(); ?>" method="POST">
+                    <!-- <form action="<?php //Session::destroy(); ?>" method="POST"> -->
                     
-                    <button type="submit">Log out</button>
-                    </form>
+                    <a href="" onclick="<?php //Session::destroy(); ?>">Log out</a>
+                    <!-- </form> -->
                     
                 </div>
             </div>
