@@ -3,8 +3,8 @@ class Database
 {
     private $host = 'localhost';
     private $dbName = 'cms';
-    private $userName = 'user2';
-    private $password = 'blade2005';
+    private $userName = 'root';
+    private $password = '';
     private $table;
     private $options = ['cost' => 12];
 
@@ -31,7 +31,7 @@ class Database
     public function register($fullName, $email, $pass, $userName)
     {
         if($fullName == '' || $email == '' || $pass == '' || $userName == ''){
-            echo 'Need to make sure all appropriate fields are populated';
+            ErrorHandling::error('Need to make sure all appropriate fields are populated');
         } else {
            
             //encrypts password
@@ -48,8 +48,6 @@ class Database
         }
         
     }
-
-
     private function passwordEncrypt($password)
     {
         return password_hash($password, CRYPT_BLOWFISH, $this->options);

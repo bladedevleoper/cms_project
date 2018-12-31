@@ -11,9 +11,12 @@ class ErrorHandling
 
     public static function extraction($errors)
     {
+        echo '<div class="container">';
         foreach($errors as $key => $value){
+    
             echo $value;
         }
+        echo '</div>';
     }
 
 

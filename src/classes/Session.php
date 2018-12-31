@@ -13,7 +13,7 @@ class Session
         
     }
 
-    //this will relate to $_SESSION[$key] = $valye
+    //this will relate to $_SESSION[$key] = $value
     public static function set($key, $value)
     {
         $_SESSION[$key] = $value;
@@ -28,17 +28,21 @@ class Session
         }
     }
 
+    public static function redirect($url)
+    {
+        return header("Location: $url");
+    }
+
+
     public static function destroy()
     {
         if(self::$sessionStart == true){
+            self::$sessionStart = false;
             //not sure if a parameter needs to go in this one
-            // self::$sessionStart = false;
-            // session_unset();
-            // session_destroy();
+            session_unset();
+            session_destroy();
             
-            //self::$sessionStart = false;
-            //header('Location: http://www.localhost/cms/views/login.php');
-            //exit;
+            self::redirect('login.php');
         }
         
     }
