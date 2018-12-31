@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 <h3>Register</h5>
-    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <div class="form-group">
         <label for="fullname">Full Name</label>
         <input type="text" class="form-control" name="fullname" id="fullname" />
@@ -39,6 +39,7 @@
        
 
         <button class="btn btn-primary" type="submit">Register</button>
+        <a href="login.php" class="btn btn-secondary">Back to Login</a>
     </form>
 </div>
 

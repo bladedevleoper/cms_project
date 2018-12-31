@@ -21,7 +21,7 @@
     }
 ?>
 </div>
-    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <div class="container">
             <h4>Login Here</h4>
                 <div class="form-grpup">
@@ -32,7 +32,8 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control"/>
                 </div>
-            <button type="submit">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="register.php" class="btn btn-secondary">Register</a>
         </div>
     </form>
 

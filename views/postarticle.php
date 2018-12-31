@@ -1,5 +1,16 @@
 <?php
     require_once( '../src/config.php' );
+
+    Session::start();
+    if(!isset($_SESSION['username'])){  
+        Session::redirect('login.php');
+    }
+        
+    if(isset($_GET['logout']) && $_GET['logout'] == true){
+    
+             Session::destroy();
+    }
+
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $post = new Post();
         $post->postArticle($_POST['title'], $_POST['body']);
@@ -17,7 +28,7 @@
 </head>
 <body>
 
-<form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
     <div class="container">
 

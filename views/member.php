@@ -1,7 +1,19 @@
 <?php
 require_once( '../src/config.php' );
-    Session::start();
-    //Session::destroy();
+
+Session::start();
+if(!isset($_SESSION['username'])){  
+    Session::redirect('login.php');
+}
+    
+if(isset($_GET['logout']) && $_GET['logout'] == true){
+
+         
+         $logout = new Login();
+         $logout->isNotActive($_SESSION['user_id']);
+         Session::destroy();
+}
+   
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +27,7 @@ require_once( '../src/config.php' );
 </head>
 <body>
     <div class="container">
-        <div class="tag">
+        <div class="tag" onload="hide();">
             <?php
                 ErrorHandling::success('Logged in Successfully');
             ?>   
@@ -27,19 +39,36 @@ require_once( '../src/config.php' );
                     if(isset($_SESSION['username'])){
                         echo  $_SESSION['username'];
                     }
-                    //var_dump($_SESSION, self::$sessionStart);
+                    
                     ?>
                 </span>
 
                 
-                <div>
+                <div class="col">
                     
-                    
-                    <a href="<?php //Session::destroy(); ?>">Log out</a>
+                    <a href="?logout=true">Log out</a>
                    
-                    
                 </div>
             </div>
+        </div>
+        <div class="row">
+                        <h4>Current Active Users</h4>
+        </div>
+        <div class="row">
+                   <?php 
+                        $members = new Members();
+                    ?>
+                    
+                    
+                    <div class="col-sm-2">
+                    
+                        <ul class="list-group">
+                            <?php foreach($members->activeMembers($_SESSION['username']) as $key => $user) : ?>
+                                    <li class="list-group-item"><?= implode($user); ?></li> 
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                        
         </div>
     </div>
 
@@ -50,10 +79,22 @@ require_once( '../src/config.php' );
 <script>
 
 let tag = document.querySelector('.tag');
+var storage = window.localStorage;
 
-setInterval(() => {
+
+
+if(storage.loggedIn == false){
+    setInterval(() => {
     tag.style.display = 'none';
+    storage.setItem('loggedIn', true);
 }, 3000);
+}
+
+function hide(){
+
+}
+
+
 
 </script>
 </body>
