@@ -35,7 +35,7 @@ require_once( '../src/config.php' );
                 <div>
                     
                     
-                    <a href="<?php Session::destroy(); ?>">Log out</a>
+                    <a href="<?php //Session::destroy(); ?>">Log out</a>
                    
                     
                 </div>

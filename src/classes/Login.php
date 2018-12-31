@@ -33,7 +33,7 @@ class Login extends Database
                 $error = ErrorHandling::error('Sorry the password does not match');
                 return $error;
             } else {
-                //Session::start();
+                Session::start();
                 Session::set('username', $user['username']);
                 header('Location: http://www.localhost/cms/views/member.php');
             }
