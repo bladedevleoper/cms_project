@@ -46,9 +46,10 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
 
                 
                 <div class="col">
-                    
                     <a href="?logout=true" onclick="clearStorage();">Log out</a>
-                   
+                </div>
+                <div class="col">
+                    <a href="postarticle.php">Post an Article</a>
                 </div>
             </div>
         </div>

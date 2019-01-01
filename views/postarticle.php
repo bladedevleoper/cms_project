@@ -13,7 +13,7 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $post = new Post();
-        $post->postArticle($_POST['title'], $_POST['body']);
+        $post->postArticle($_POST['title'], $_POST['body'], $_SESSION['user_id']);
     }
     
 ?>

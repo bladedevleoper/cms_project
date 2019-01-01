@@ -1,0 +1,18 @@
+Interfaces:
+
+1. Interfaces are a sort of encapsulation which is a way of defining a set of rules on how a class should behave (similar to a contract).
+
+2. When we implement an interface, the class should then implement the methods that are defined within the interface.
+
+3. Interface Segregation: We are designing our classes in a way which does not force coupling (type hinting with a class).
+
+4. Instead of type hinting within methods in a particular class, we can add an interface to allow rules to be placed. See below:
+- it will stop us from using a class name as a type hint
+public function addShape(Circle $shape)
+{
+    return $shape->addShape();
+}
+
+5. If a method has been declared in the interface then it will have to be declared within the class that implements the interface.
+
+6.
