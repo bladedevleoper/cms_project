@@ -78,41 +78,5 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="../assets/js/functions.js"></script>
 
-<script>
-
-// let tag = document.querySelector('.tag');
-// var storage = window.localStorage;
-
-// if(storage.logged == ''){
-
-//     setInterval(() => {
-        
-//         tag.hidden = false;
-//         tag.style.display = 'none';
-        
-//         storage.setItem('logged', true);
-    
-//         //tag.hidden = true;
-//         //storage.setItem('logged', true);
-//     }, 3000);
-// } else if (stored.logged == true) {
-//     tag.style.display = 'none';
-// }
-
-
-// function clearStorage(){
-//     clear();
-// }
-
-    
-
-
-// function hide(){
-//     tag.
-// }
-
-
-
-</script>
 </body>
 </html>
