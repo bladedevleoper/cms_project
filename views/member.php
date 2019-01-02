@@ -1,6 +1,7 @@
 <?php
 require_once( '../src/config.php' );
 
+$members = new Members();
 Session::start();
 if(!isset($_SESSION['username'])){  
     Session::redirect('login.php');
@@ -28,56 +29,55 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
 </head>
 <body>
     <div class="container">
+    <?php include __DIR__ . '/nav.php'; ?>
         <div class="tag">
-            <?php
-                ErrorHandling::success('Logged in Successfully');
-            ?>   
+            <?php ErrorHandling::success('Logged in Successfully'); ?>   
         </div>
 
-        <div class="row">
-            <div class="col-sm-10">
-                <span>Welcome <?php 
-                    if(isset($_SESSION['username'])){
-                        echo  $_SESSION['username'];
-                    }
-                    
-                    ?>
-                </span>
 
-                
-                <div class="col">
-                    <a href="?logout=true" onclick="clearStorage();">Log out</a>
-                </div>
-                <div class="col">
-                    <a href="postarticle.php">Post an Article</a>
-                </div>
-            </div>
+        <div class="row">
+
+                        <?php if(count($members->activeMembers($_SESSION['username'])) == 0 ){
+                            echo '<h4>No Active Users</h4>';
+                        } else {
+                            echo "<h4>Current Active Users</h4>";
+                        }
+                        ?>
+                        
         </div>
         <div class="row">
-                        <h4>Current Active Users</h4>
-        </div>
-        <div class="row">
-                   <?php 
-                        $members = new Members();
-                    ?>
-                    
-                    
+                   
                     <div class="col-sm-2">
-                    
                         <ul class="list-group">
                             <?php foreach($members->activeMembers($_SESSION['username']) as $key => $user) : ?>
                                     <li class="list-group-item"><?= implode($user); ?></li> 
                             <?php endforeach;?>
                         </ul>
-                    </div>
-                        
+                    </div>               
         </div>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="../assets/js/functions.js"></script>
+    <script>
+    
+        let tag = document.querySelector('.tag');
+        var storage = window.localStorage;
+
+        if(storage.logged == 'true'){
+            tag.setAttribute('hidden','');
+
+        } else {
+            setInterval(() => {
+            
+                tag.style.display = 'none';
+                storage.setItem('logged', true);
+            
+            }, 3000);
+        }
+    </script>
 
 </body>
 </html>

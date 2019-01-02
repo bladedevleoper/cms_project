@@ -35,22 +35,18 @@ class Login extends Database
             }
             
         }
-
         
     }
-
     public function isNotActive($user_id)
     {
         $stmt = $this->databaseConnection()->prepare("UPDATE users SET is_active = 0 WHERE id = :user_id");
         $stmt->bindparam(':user_id', $user_id);
         $stmt->execute();
     }
-
     public function isActive($user_id)
     {
         $stmt = $this->databaseConnection()->prepare("UPDATE users SET is_active = 1 WHERE id = :user_id");
         $stmt->bindparam(':user_id', $user_id);
         $stmt->execute();
     }
-
 }

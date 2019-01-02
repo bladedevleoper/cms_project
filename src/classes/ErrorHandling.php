@@ -1,3 +1,4 @@
+
 <?php
 
 class ErrorHandling
@@ -7,8 +8,6 @@ class ErrorHandling
         $error = "<div class='alert alert-danger' role='alert'>$message</div>";
         return self::extraction(compact('error'));
     }
-
-
     public static function extraction($errors)
     {
         echo '<div class="container">';
@@ -18,13 +17,9 @@ class ErrorHandling
         }
         echo '</div>';
     }
-
-
     public static function success($message)
     {
         $error = "<div class='alert alert-success' role='alert'>$message</div>";
         return self::extraction(compact('error'));
     }
-
-
 }
