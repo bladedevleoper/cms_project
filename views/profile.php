@@ -37,6 +37,10 @@ $user = $profile->getProfileDetails($_SESSION['username']);
         </div>
     </div>  
         <div class="col-sm-5 mx-auto">
+        <?php // some $_GET array here ?>
+        <div class="alert alert-success">
+        <!-- output success message -->
+        </div>
             <form>
                        
                 <div class="form-group">
