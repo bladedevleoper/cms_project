@@ -1,7 +1,6 @@
 <?php
 require_once( '../src/config.php' );
 
-$members = new Members();
 Session::start();
 if(!isset($_SESSION['username'])){  
     Session::redirect('login.php');
@@ -14,7 +13,13 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
          $logout->isNotActive($_SESSION['user_id']);
          Session::destroy();
 }
-   
+
+$profile = new Profile();
+$user = $profile->getProfileDetails($_SESSION['username']);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $profile->updateUser($_POST['fullname'], $_POST['email'], $_POST['username'], $_SESSION['user_id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,17 +33,36 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
     
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <?php include __DIR__ . '/nav.php'; ?>
     <div class="row">
-        <h4>Edit Profile</h4>
+        <div class="col">
+            <h4>Edit Profile</h4>
+        </div>
     </div>
-    </div>
+        <div class="col-sm-5 mx-auto">
+            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                       
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" name="fullname" value="<?= $user['FullName']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" class="form-control" name="email" value="<?= $user['email']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" name="username" value="<?= $user['username']; ?>">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                    <a href="profile.php" class="btn btn-secondary">Cancel Edit</a>
+                </div>
+            
+            </form>
+        </div>
+    
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../assets/js/functions.js"></script>
-
-</body>
-</html>
+<?php include __DIR__ . '/footer.php'; ?>

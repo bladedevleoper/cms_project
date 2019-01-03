@@ -1,7 +1,6 @@
 <?php
 require_once( '../src/config.php' );
 
-$members = new Members();
 Session::start();
 if(!isset($_SESSION['username'])){  
     Session::redirect('login.php');
@@ -14,7 +13,9 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
          $logout->isNotActive($_SESSION['user_id']);
          Session::destroy();
 }
-   
+
+$profile = new Profile();
+$user = $profile->getProfileDetails($_SESSION['username']);
 ?>
 
 <!DOCTYPE html>
@@ -28,18 +29,35 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
     
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <?php include __DIR__ . '/nav.php'; ?>
     <div class="row">
-        <h4>Profile</h4>
-        <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
-    </div>
-    </div>
+        <div class="col">
+            <h4>Profile</h4>
+        </div>
+    </div>  
+        <div class="col-sm-5 mx-auto">
+            <form>
+                       
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" value="<?= $user['FullName']; ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" class="form-control" value="<?= $user['email']; ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" value="<?= $user['username']; ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+                </div>
+            
+            </form>
+        </div>
+    
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../assets/js/functions.js"></script>
-
-</body>
-</html>
+<?php include __DIR__ . '/footer.php'; ?>
