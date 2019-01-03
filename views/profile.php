@@ -5,7 +5,7 @@ Session::start();
 if(!isset($_SESSION['username'])){  
     Session::redirect('login.php');
 }
-    
+
 if(isset($_GET['logout']) && $_GET['logout'] == true){
 
          
@@ -37,12 +37,43 @@ $user = $profile->getProfileDetails($_SESSION['username']);
         </div>
     </div>  
         <div class="col-sm-5 mx-auto">
-        <?php // some $_GET array here ?>
-        <div class="alert alert-success">
-        <!-- output success message -->
-        </div>
-            <form>
-                       
+        <?php if(isset($_GET['success']) == true ){?>
+        
+            <div class="alert alert-success alert-dismissable fade show">
+            <!-- output success message -->
+                Profile updated successfully
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+        <?php } ?>
+             
+             <?php 
+             // move this into a class on Profile
+             $dir = "profile_photos";
+            $fileArray = [];
+
+             if(is_dir($dir)){
+                if($dh = opendir($dir)){
+                    //print_r($dh);
+                    while(($file = readdir($dh)) != false){
+                        //echo "filename: " . $file . "</br>";
+                        //push to an array
+                        //look at base64 and include in the database
+                        array_push($fileArray, $file);
+                    }
+
+                    //close file directory
+                    closedir($dh);
+
+                    
+                }
+             }
+
+             ?>
+                <img class="img-thumbnail" src="<?php echo 'profile_photos/' . $fileArray[2];  ?>" />
+             
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" class="form-control" value="<?= $user['FullName']; ?>" disabled>
@@ -58,10 +89,9 @@ $user = $profile->getProfileDetails($_SESSION['username']);
                 <div class="form-group">
                     <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
                 </div>
-            
-            </form>
         </div>
     
 </div>
+
 
 <?php include __DIR__ . '/footer.php'; ?>

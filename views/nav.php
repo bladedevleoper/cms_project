@@ -26,10 +26,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="nav-link" href="profile.php">Profile</a>
+                        <a class="nav-link" href="?logout=true" onclick="clearStorage();">Log out</a>
                     </div>
                     </li>
-                    
-                    <li class="nav-item"><a class="nav-link" href="?logout=true" onclick="clearStorage();">Log out</a></li>
                 </ul>
             </div>
 </nav>

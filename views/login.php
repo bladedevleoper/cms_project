@@ -1,4 +1,6 @@
-<?php require_once( '../src/config.php' ); ?>
+<?php 
+    require_once( '../src/config.php' );
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,30 +14,32 @@
 <body>
  
 <div class="container">
-<?php
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-        $login = new Login;
-        $login->checkUser($_POST['username'], $_POST['password']);
+        <div class="col-sm-5 mx-auto mt-5">
+        <?php if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    }
-?>
-</div>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-        <div class="container">
-            <h4>Login Here</h4>
-                <div class="form-grpup">
-                    <label for="username">User Name</label>
-                    <input type="text" name="username" id="username" class="form-control"/>
+            $login = new Login;
+            $login->checkUser($_POST['username'], $_POST['password']);
+
+            }
+        ?>
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <div class="container">
+                    <h4>Login Here</h4>
+                        <div class="form-grpup">
+                            <label for="username">User Name</label>
+                            <input type="text" name="username" id="username" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control"/>
+                        </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="register.php" class="btn btn-secondary">Register</a>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control"/>
-                </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <a href="register.php" class="btn btn-secondary">Register</a>
+            </form>
         </div>
-    </form>
-
+    
+</div>
 
     <?php include __DIR__ . '/footer.php'; ?>

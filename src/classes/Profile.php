@@ -27,7 +27,7 @@ class Profile extends Database
         //ErrorHandling::success('Profile Updated');
         $message = 'Profile Updated';
         
-        return header('Location: http://www.localhost/cms/views/profile.php?success');
+        return header('Location: http://www.localhost/cms/views/profile.php?success=true');
     
     }
 }
