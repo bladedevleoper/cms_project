@@ -55,6 +55,19 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
                         </ul>
                     </div>               
         </div>
+        <div class="row">
+            <h4>Recent Posts</h4>
+            <div class="col-sm-10">
+                        <?php 
+                            $articles = new Articles();
+                            foreach($articles->displayArticles() as $article => $row){
+                                echo 'Post Title';
+                                echo "<div>".$row['title']."</div>";
+                               // var_dump($row);
+                            }
+                        ?>
+            </div>
+        </div>
     </div>
 
     <script>

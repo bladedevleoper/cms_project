@@ -3,6 +3,7 @@
 class Members extends Database
 {
     private $table = 'users';
+    
     public function activeMembers($currentUser)
     {
      $stmt = $this->databaseConnection()->prepare("SELECT username FROM $this->table WHERE is_active = 1 AND username != :currentUser");
@@ -11,4 +12,6 @@ class Members extends Database
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
      
     }
+
+
 }
