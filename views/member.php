@@ -56,18 +56,52 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
                     </div>               
         </div>
         <div class="row">
-            <h4>Recent Posts</h4>
-            <div class="col-sm-10">
-                        <?php 
-                            $articles = new Articles();
-                            foreach($articles->displayArticles() as $article => $row){
-                                echo 'Post Title';
-                                echo "<div>".$row['title']."</div>";
-                               // var_dump($row);
-                            }
-                        ?>
+            <div class="col">
+                <h4>Recent Posts</h4>
             </div>
         </div>
+        <div class="row">
+        <div class="col-sm-7">
+            <?php 
+                $articles = new Articles();
+                $table = [
+                    'Post Title',
+                    'Article Message',
+                    'Posted By',
+                    'Date Posted',
+                ];
+                
+                // foreach($articles->displayArticles() as $article => $row){
+                //     echo 'Post Title';
+                //     echo "<div>".$row['title']."</div>";
+                    
+                // }
+            ?>
+
+                <table class="table table-sm">
+                    <thead>
+                        <?php foreach($table as $key) :?>
+
+                            <th scope="col"><?= $key; ?></th>
+                            
+                        <?php endforeach; ?>
+                    </thead>
+                    <tbody>
+                        <?php foreach($articles->displayArticles() as $article => $row) : ?>
+
+                            <tr>
+                                <td><?= $row['title']; ?></td>
+                                <td><?= $row['body']; ?></td>
+                                <td><?= $row['entered_by']; ?></td>
+                                <td><?= date('d/m/Y',strtotime($row['date'])); ?></td>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                
     </div>
 
     <script>
