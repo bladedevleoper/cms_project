@@ -18,7 +18,8 @@ $profile = new Profile();
 $user = $profile->getProfileDetails($_SESSION['username']);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $profile->updateUser($_POST['fullname'], $_POST['email'], $_POST['username'], $_SESSION['user_id']);
+    $profile->updateUser($_POST['fullname'], $_POST['email'], $_POST['username'],$_FILES['file'], $_SESSION['user_id']);
+    // $profile->uploadImage();
 }
 ?>
 
@@ -41,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         </div>
     </div>
         <div class="col-sm-5 mx-auto">
-            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
                        
                 <div class="form-group">
                     <label>Full Name</label>
@@ -54,6 +55,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <div class="form-group">
                     <label>User Name</label>
                     <input type="text" class="form-control" name="username" value="<?= $user['username']; ?>">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Image</label>
+                    <input type="file" class="form-control" name="file" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update Profile</button>

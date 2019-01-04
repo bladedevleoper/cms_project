@@ -50,29 +50,46 @@ $user = $profile->getProfileDetails($_SESSION['username']);
         <?php } ?>
              
              <?php 
-             // move this into a class on Profile
-             $dir = "profile_photos";
-            $fileArray = [];
+            //  // move this into a class on Profile
+            //  $dir = "profile_photos";
+            // $fileArray = [];
 
-             if(is_dir($dir)){
-                if($dh = opendir($dir)){
-                    //print_r($dh);
-                    while(($file = readdir($dh)) != false){
-                        //echo "filename: " . $file . "</br>";
-                        //push to an array
-                        //look at base64 and include in the database
-                        array_push($fileArray, $file);
-                    }
+            //  if(is_dir($dir)){
+            //     if($dh = opendir($dir)){
+            //         //print_r($dh);
+            //         while(($file = readdir($dh)) != false){
+            //             //echo "filename: " . $file . "</br>";
+            //             //push to an array
+            //             //look at base64 and include in the database
+            //             array_push($fileArray, $file);
+            //         }
+            //         $tempArray = [];
+            //         foreach($fileArray as $key => $value){
+            //             $newString = substr($value, 0, strpos($value, "."));
+            //             array_push($tempArray, $newString);
+            //         }
+            //         var_dump($tempArray);
+            //         var_dump($fileArray);
+            //         if(in_array($_SESSION['username'], $tempArray)){
+            //             //foreach()
+            //             // echo 'name in array';
+            //             // foreach(){
 
-                    //close file directory
-                    closedir($dh);
+            //             // }
+
+            //         } else {
+            //             echo 'not in array';
+            //         }
+            //         //close file directory
+            //         closedir($dh);
 
                     
-                }
-             }
+                    
+            //     }
+            //  }
 
              ?>
-                <img class="img-thumbnail" src="<?php echo 'profile_photos/' . $fileArray[2];  ?>" />
+                <img class="img-thumbnail" src="<?php echo 'profile_photos/' . $user['user_img'];  ?>" />
              
                 <div class="form-group">
                     <label>Full Name</label>
