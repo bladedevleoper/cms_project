@@ -7,19 +7,19 @@ class Articles extends Database
     public function displayArticles()
     {
         $articleArray = [];
-        $stmt = $this->databaseConnection()->prepare("SELECT * FROM $this->table");
+        $stmt = $this->databaseConnection()->prepare("SELECT articles.id, articles.title, articles.body, articles.date, users.FullName FROM $this->table LEFT JOIN users ON users.id = articles.entered_by");
         $stmt->execute();
 
-        //echo '<div class="container">';
+
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
             array_push($articleArray, $row);
 
-            //echo '<div class="col-sm-2">' . $row['title'] . '</div>';
+            
             
         }
-        
+
         return $articleArray;
-       // echo '</div>';   
+        
     }
 }
