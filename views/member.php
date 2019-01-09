@@ -14,6 +14,18 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
          $logout->isNotActive($_SESSION['user_id']);
          Session::destroy();
 }
+
+
+$articles = new Articles();
+$table = [
+    'Post Title',
+    'Article Message',
+    'Posted By',
+    'Date Posted',
+    'view Post'
+];
+
+
    
 ?>
 
@@ -62,17 +74,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
         </div>
         <div class="row">
         <div class="col-sm-7">
-            <?php 
-                $articles = new Articles();
-                $table = [
-                    'Post Title',
-                    'Article Message',
-                    'Posted By',
-                    'Date Posted',
-                ];
-                
-            ?>
-
+          
                 <table class="table table-sm">
                     <thead>
                         <?php foreach($table as $key) :?>
@@ -82,14 +84,15 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
                         <?php endforeach; ?>
                     </thead>
                     <tbody>
-                    <?php //var_dump($articles->displayArticles()); ?>
+                        <?php //change this to look into cards rather than a table ?>
                         <?php foreach($articles->displayArticles() as $article => $row) : ?>
-
+                            
                             <tr>
                                 <td><?= $row['title']; ?></td>
                                 <td><?= $row['body']; ?></td>
                                 <td><?= $row['FullName']; ?></td>
                                 <td><?= date('d/m/Y',strtotime($row['date'])); ?></td>
+                                <td><a href="articles.php<?php echo '?id='.$row['id'];?> "><button class="btn btn-primary">View Post</button></a></td>
                             </tr>
 
                         <?php endforeach; ?>
