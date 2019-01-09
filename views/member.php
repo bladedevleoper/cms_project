@@ -71,11 +71,6 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
                     'Date Posted',
                 ];
                 
-                // foreach($articles->displayArticles() as $article => $row){
-                //     echo 'Post Title';
-                //     echo "<div>".$row['title']."</div>";
-                    
-                // }
             ?>
 
                 <table class="table table-sm">
@@ -87,12 +82,13 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
                         <?php endforeach; ?>
                     </thead>
                     <tbody>
+                    <?php //var_dump($articles->displayArticles()); ?>
                         <?php foreach($articles->displayArticles() as $article => $row) : ?>
 
                             <tr>
                                 <td><?= $row['title']; ?></td>
                                 <td><?= $row['body']; ?></td>
-                                <td><?= $row['entered_by']; ?></td>
+                                <td><?= $row['FullName']; ?></td>
                                 <td><?= date('d/m/Y',strtotime($row['date'])); ?></td>
                             </tr>
 
