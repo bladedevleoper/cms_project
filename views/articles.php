@@ -63,26 +63,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 </div>
             </div>   
         </div>
-            
-        
+
         <div class="row">
-
         <?php foreach($displayComments->displayArticlePosts($_GET['id']) as $key): ?>
-
-            <div class="col">
-                <?= $key['username']; ?>
-            </div>
-            <div class="col">
-                <?= $key['comment']; ?>
-            </div>
-            <div class="col">
-                <?= $key['date']; ?>
-            </div>
-            
-        <?php endforeach;?>
-
+                <div class="col-sm-3">
+                    <div class="card text-white bg-dark">
+                        <div class="card-header">
+                            <span><?= $key['username']; ?></span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"></p><?= $key['comment']; ?></p>
+                            <span class="card-text"><?= date('d / m / Y', strtotime($key['date'])); ?></span>
+                        </div>
+                    </div>    
+                </div>
+            <?php endforeach;?>
+        </div>    
         
-        
+        <div class="row">       
 
             <div class="col">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="commentArea" method="POST">
@@ -90,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 </form>
             </div>
         </div>
-        <button class="btn btn-primary" id="addButton">Add a Comment</button>
+        <button class="btn btn-primary mt-1" id="addButton">Add a Comment</button>
     </div>
                 
     </div>
