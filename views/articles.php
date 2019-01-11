@@ -17,6 +17,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
     $viewPost = new ViewPost($_GET['id']);
     $display = $viewPost->displayPost();
 
+    $displayComments = new Articles();
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     // echo 'Comment posted';
     $postComment = new Articles();
@@ -64,6 +66,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             
         
         <div class="row">
+
+        <?php foreach($displayComments->displayArticlePosts($_GET['id']) as $key): ?>
+
+            <div class="col">
+                <?= $key['username']; ?>
+            </div>
+            <div class="col">
+                <?= $key['comment']; ?>
+            </div>
+            <div class="col">
+                <?= $key['date']; ?>
+            </div>
+            
+        <?php endforeach;?>
+
+        
+        
+
             <div class="col">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="commentArea" method="POST">
                 <input type="text" name="id" value="<?= $_GET['id']; ?>" hidden>

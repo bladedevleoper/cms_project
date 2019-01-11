@@ -3,8 +3,8 @@ class Database
 {
     private $host = 'localhost';
     private $dbName = 'cms';
-    private $userName = 'root';
-    private $password = '';
+    private $userName = 'user2';
+    private $password = 'blade2005';
     private $table;
     private $options = ['cost' => 12];
 

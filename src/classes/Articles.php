@@ -32,8 +32,23 @@ class Articles extends Database
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':comment', $comment);
             $stmt->execute();
+            
+            $link = "articles.php?id=" . $article_id;
 
-        var_dump($stmt);
-            //return 'Comment Posted';
+            //var_dump($stmt);
+            return header("Location: $link");
+    }
+
+
+    public function displayArticlePosts($id)
+    {
+        $commentArr = array();
+        $stmt = $this->databaseConnection()->prepare("SELECT * FROM $this->secondaryTable WHERE article_id = :id");
+        $stmt->execute(array(':id' => $id));
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            array_push($commentArr, $row);
+        }
+        //print_r($commentArr);
+        return $commentArr;
     }
 };
