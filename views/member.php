@@ -73,13 +73,13 @@ $table = [
             </div>
         </div>
         <div class="row">
-        <div class="col-sm-7">
+        <div class="col">
           
-                <table class="table table-sm">
+                <table class="table table-sm table-hover">
                     <thead>
                         <?php foreach($table as $key) :?>
 
-                            <th scope="col"><?= $key; ?></th>
+                            <th scope="col" <?php echo ($key === 'Post Title' ? 'style="width:200px"' : '');?> ><?= $key; ?></th>
                             
                         <?php endforeach; ?>
                     </thead>
@@ -88,7 +88,7 @@ $table = [
                         <?php foreach($articles->displayArticles() as $article => $row) : ?>
                             
                             <tr>
-                                <td><?= $row['title']; ?></td>
+                                <td scope="row"><?= $row['title']; ?></td>
                                 <td><?= $row['body']; ?></td>
                                 <td><?= $row['FullName']; ?></td>
                                 <td><?= date('d/m/Y',strtotime($row['date'])); ?></td>
