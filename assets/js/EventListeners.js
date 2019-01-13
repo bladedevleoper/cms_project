@@ -11,22 +11,26 @@ function createComment()
         formGroup.setAttribute('class', 'form-group');
         formGroup.setAttribute('id', 'commentTag');
 
-    const labelName = document.createElement('label');
-        labelName.textContent = 'Your Name';
-        labelName.setAttribute('id', 'labelName');
+    //removed as getting username dynamcially
+    //const labelName = document.createElement('label');
+    //    labelName.textContent = 'Your Name';
+    //    labelName.setAttribute('id', 'labelName');
 
-    const inputText = document.createElement('input');
-        inputText.type = 'text';
-        inputText.setAttribute('class', 'form-control');
-        inputText.setAttribute('name', 'personName');
+    //removed as getting username dynamcially
+    //const inputText = document.createElement('input');
+    //    inputText.type = 'text';
+    //    inputText.setAttribute('class', 'form-control');
+    //    inputText.setAttribute('name', 'personName');
 
     const commentLabel = document.createElement('label');
         commentLabel.textContent = 'Please Leave your comment';
+        commentLabel.setAttribute("id", 'commentLabel');
     
     const textArea = document.createElement('textarea');
         textArea.setAttribute('class', 'form-control');
         textArea.setAttribute('placeholder', 'Please enter comment');
         textArea.setAttribute('name', 'comment');
+        
 
     const submitButton = document.createElement('button');
         submitButton.textContent = 'Post Comment';
@@ -36,8 +40,8 @@ function createComment()
     //append elements to parent element
     commentArea.parentElement;
     commentArea.appendChild(formGroup);
-    formGroup.appendChild(labelName);
-    formGroup.appendChild(inputText);
+    //formGroup.appendChild(labelName);
+    //formGroup.appendChild(inputText);
     formGroup.appendChild(commentLabel);
     formGroup.appendChild(textArea);
     formGroup.appendChild(submitButton);
@@ -51,7 +55,7 @@ function clear()
     
     //gets the created id elements
     var divComment = document.querySelector('#commentArea');
-    var label = document.querySelector('#labelName');
+    var label = document.querySelector('#commentLabel');
 
     //set the commentArea as labels parent node
     divComment = label.parentNode;

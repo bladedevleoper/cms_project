@@ -43,7 +43,7 @@ class Articles extends Database
     public function displayArticlePosts($id)
     {
         $commentArr = array();
-        $stmt = $this->databaseConnection()->prepare("SELECT * FROM $this->secondaryTable WHERE article_id = :id");
+        $stmt = $this->databaseConnection()->prepare("SELECT comments.username, comments.comment, comments.date, users.user_img FROM comments LEFT JOIN users ON users.username = comments.username WHERE article_id = :id");
         $stmt->execute(array(':id' => $id));
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             array_push($commentArr, $row);

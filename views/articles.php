@@ -22,7 +22,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == true){
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     // echo 'Comment posted';
     $postComment = new Articles();
-    $postComment->articleComment($_POST['personName'], $_POST['comment'], $_POST['id']);
+    //$_POST['personName']
+    $postComment->articleComment($_SESSION['username'], $_POST['comment'], $_POST['id']);
 }
 
 ?>
@@ -64,20 +65,32 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             </div>   
         </div>
 
-        <div class="row">
-        <?php foreach($displayComments->displayArticlePosts($_GET['id']) as $key): ?>
-                <div class="col-sm-3">
-                    <div class="card text-white bg-dark">
-                        <div class="card-header">
-                            <span><?= $key['username']; ?></span>
+        <div class="row mt-1">
+        <?php if(count($displayComments->displayArticlePosts($_GET['id'])) > 0): ?>
+            <?php foreach($displayComments->displayArticlePosts($_GET['id']) as $key): ?>
+                    <div class="col-sm-3">
+                        <div class="card text-white bg-dark">
+                            <div class="card-header mx-auto">
+                                <div class="col">
+                                        <img class="text-secondary img-thumbnail" id="comment-pic" role="status" src="<?php echo ($key['user_img'] != '' ? 'profile_photos/' . $key['user_img'] : 'profile_photos/' . 'default.jpg');  ?>">
+                                </div>
+                                <div class="col text-center">
+                                    <span><?= ucwords($key['username']); ?></span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-center"><?= date('d / m / Y', strtotime($key['date'])); ?></p>
+                                <p class="card-text text-center"><?= $key['comment']; ?></p>
+                            </div>
+                        </div>    
+                    </div>
+                <?php endforeach;?>
+                <?php else : ?>
+                   
+                        <div class="col">
+                            <h6>No comments, be the first to comment.....</h6>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text"></p><?= $key['comment']; ?></p>
-                            <span class="card-text"><?= date('d / m / Y', strtotime($key['date'])); ?></span>
-                        </div>
-                    </div>    
-                </div>
-            <?php endforeach;?>
+                <?php endif; ?>
         </div>    
         
         <div class="row">       
