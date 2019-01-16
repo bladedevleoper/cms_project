@@ -1,3 +1,6 @@
+//Look to refactor this by taking notes from the video 
+//look to create a new function within the function to create
+//the element and add the text and type to that element
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.querySelector('#addButton');
