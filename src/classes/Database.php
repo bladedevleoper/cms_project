@@ -7,7 +7,6 @@ class Database
     private $password = '';
     private $table;
     private $options = ['cost' => 12];
-gi
 
 
     public function databaseConnection()
