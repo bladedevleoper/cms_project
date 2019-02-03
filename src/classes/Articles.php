@@ -1,6 +1,6 @@
 <?php
 
-class Articles extends Database
+class Articles extends Database implements ArticleInterface
 {
     private $table = 'articles';
     private $secondaryTable = 'comments';
@@ -21,7 +21,7 @@ class Articles extends Database
         }
 
         return $articleArray;
-       // echo '</div>';   
+       //echo '</div>';   
     }
 
     public function articleComment($username, $comment, $article_id)

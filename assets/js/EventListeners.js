@@ -1,5 +1,5 @@
 
-document.addEventListener('DOMConentLoaded', () => {
+// document.addEventListener('DOMConentLoaded', () => {
         const addButton = document.querySelector('#addButton');
         const commentArea = document.querySelector('#commentArea');
         const cancelButton = document.querySelector('#cancel');
@@ -81,5 +81,5 @@ document.addEventListener('DOMConentLoaded', () => {
 
         });
 
-});
+// });
 
